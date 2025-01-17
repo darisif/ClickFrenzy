@@ -1,9 +1,4 @@
-using System;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using Unity.VisualScripting; //Allows us to use Lists. 
 
 /// <summary>
 /// Provided by an Unity Tutorial on Singletons.
@@ -12,9 +7,9 @@ using Unity.VisualScripting; //Allows us to use Lists.
 public class GameManager : MonoBehaviour
 {
     //Static instance of GameManager which allows it to be accessed by any other script.
-    public static GameManager instance = null;
+    public static GameManager instance { get; set; } = null;
 
-    public GameObject StartMenu; 
+    public GameObject startMenu; 
 
     //Awake is always called before any Start functions
     void Awake()
@@ -22,7 +17,7 @@ public class GameManager : MonoBehaviour
         //Check if instance already exists
         if (instance == null)
 
-            //if not, set instance to this
+            //if not, set instance to this      
             instance = this;
 
         //If instance already exists and it's not this:
@@ -35,7 +30,7 @@ public class GameManager : MonoBehaviour
         //To be clear for others: this does not mean JUST loading the current scene, but also any new ones.
         DontDestroyOnLoad(gameObject);
 
-        StartMenu = GameObject.Find("StartMenu").gameObject;
+        startMenu = GameObject.Find("StartMenu").gameObject;
     }
 
     private void Start()
@@ -45,6 +40,6 @@ public class GameManager : MonoBehaviour
     //Update is called every frame.
     void Update()
     {
-        StartMenu.SetActive(true);
+        startMenu.SetActive(true);
     }
 }
