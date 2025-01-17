@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     //Static instance of GameManager which allows it to be accessed by any other script.
     public static GameManager instance { get; set; } = null;
 
-    public GameObject startMenu; 
+    public GameObject startMenu;
+    private double _timer = 0;
+    private bool _gameStarted = false;
+    private int _score = 0;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -41,5 +44,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         startMenu.SetActive(true);
+        if (_gameStarted)
+        {
+            _timer -= 1 * Time.deltaTime;
+        }
+    }
+
+    public void IncreaseScore(int value)
+    {
+        _score += value;
+        Debug.Log($"Score is {_score}");
     }
 }
