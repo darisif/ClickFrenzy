@@ -36,10 +36,13 @@ public class Upgrade : MonoBehaviour
 
     private void OnMouseOver()
     {
+        Debug.Log("hovering over upgrade!");
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("clicking upgrade!");
             if (gameManager.DecreaseScore(10))
             {
+                Debug.Log("upgrade paid!");
                 _circle.UpgradeCircle(EUpgradeType.ScoreMult, 1.7);
                 gameObject.SetActive(false);
             }

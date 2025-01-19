@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public bool DecreaseScore(int value)
     {
-        if (value >= _score)
+        if (_score >= value)
         {
             _score -= value;
             _scoreDisplayText.text = $"{_score}";
