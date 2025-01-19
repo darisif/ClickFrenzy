@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -11,8 +12,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; set; } = null;
 
     public GameObject startMenu;
-    private GameObject _scoreDisplayObject;
     private TextMeshProUGUI _scoreDisplayText;
+    private TextMeshProUGUI _timerDisplayText;
+    private Circle _circle;
+    private GameObject _upgrade;
     private double _timer = 0;
     private bool _gameStarted = false;
     private int _score = 0;
@@ -39,21 +42,32 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         startMenu = GameObject.Find("Start Menu").gameObject;
-        _scoreDisplayObject = GameObject.Find("/Score Display/Score Display Text");
-        _scoreDisplayText = _scoreDisplayObject.GetComponent<TextMeshProUGUI>();
+        _scoreDisplayText = GameObject.Find("/Score Display/Score Display Text").GetComponent<TextMeshProUGUI>();
+        _timerDisplayText = GameObject.Find("/Timer Display/Timer Display Text").GetComponent<TextMeshProUGUI>();
+        _circle = GameObject.Find("Circle").GetComponent<Circle>();
+        _upgrade = GameObject.Find("Upgrade");
     }
 
     private void Start()
     {
+        startMenu.SetActive(true);
     }
 
     //Update is called every frame.
     void Update()
     {
-        startMenu.SetActive(true);
         if (_gameStarted)
         {
-            _timer -= 1 * Time.deltaTime;
+            _timer = Math.Clamp((_timer -= 1 * Time.deltaTime), 0, 120);
+            _timerDisplayText.text = $"Time left: {_timer}";
+            if (_timer == 0)
+            {
+                _gameStarted = false;
+                _timerDisplayText.text = "Game over!";
+                _scoreDisplayText.text = $"Final score: {_score}";
+                _circle.gameObject.SetActive(false);
+                _upgrade.SetActive(false);
+            }
         }
     }
 
@@ -71,6 +85,19 @@ public class GameManager : MonoBehaviour
             _score -= value;
             _scoreDisplayText.text = $"{_score}";
             Debug.Log($"Score is {_score}");
+            return true;
+        }
+        return false;
+    }
+
+    public bool StartGame()
+    {
+        _gameStarted = true;
+        if (_gameStarted)
+        {
+            _circle.gameObject.SetActive(true);
+            _upgrade.SetActive(true);
+            _timer = 10;
             return true;
         }
         return false;

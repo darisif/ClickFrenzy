@@ -37,6 +37,7 @@
             {
                 Debug.Log("Game manager instance obtained!");
             }
+            this.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
