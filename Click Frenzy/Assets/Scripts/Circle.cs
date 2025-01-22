@@ -6,7 +6,6 @@
     public class Circle : MonoBehaviour
     {
         public static Circle instance { get; set; } = null;
-        [SerializeField]
         public static GameObject gameManagerObject = null;
         public static GameManager gameManager = null;
         private int flatScore = 1;
