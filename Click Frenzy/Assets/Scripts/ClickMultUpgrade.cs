@@ -2,7 +2,7 @@ using System;
 using DefaultNamespace;
 using UnityEngine;
 
-public class ClickMultUpgrade : MonoBehaviour, Upgrade
+public class ClickMultUpgrade : MonoBehaviour, IUpgrade
 {
     private Circle _circle;
     public static GameObject gameManagerObject = null;

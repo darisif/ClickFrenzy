@@ -6,7 +6,7 @@ using UnityEngine;
 public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager instance { get; set; } = null;
-    public List<Upgrade> UpgradeCollection { get; set; } = new List<Upgrade>(){};
+    public List<IUpgrade> UpgradeCollection { get; set; } = new List<IUpgrade>(){};
     public int FlatScoreBonus { get; set; } = 1;
     public double ScoreMultiplierBonus { get; set; } = 1.00;
 

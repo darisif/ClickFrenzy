@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AutoClickerUpgrade : MonoBehaviour, Upgrade
+public class AutoClickerUpgrade : MonoBehaviour, IUpgrade
 {
     public static GameObject gameManagerObject = null;
     public static GameManager gameManager = null;

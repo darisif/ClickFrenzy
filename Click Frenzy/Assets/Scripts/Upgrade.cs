@@ -1,6 +1,6 @@
 namespace DefaultNamespace
 {
-    public interface Upgrade
+    public interface IUpgrade
     {
         abstract void OnBuy();
     }
