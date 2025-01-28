@@ -10,9 +10,8 @@ public class AutoClickerUpgrade : MonoBehaviour, IUpgrade
     public static GameObject gameManagerObject = null;
     public static GameManager gameManager = null;
     public UpgradeManager upgradeManager = null;
-    private int _flatScore = 0;
-    private double _scoreMultiplier = 1;
-
+    [SerializeField] private GameObject _prefab = null;
+    
     void Awake()
     {
         gameManagerObject = GameObject.Find("Game Manager");
@@ -25,19 +24,36 @@ public class AutoClickerUpgrade : MonoBehaviour, IUpgrade
         {
             Debug.Log("Game manager instance obtained!");
         }
-
+        gameObject.SetActive(false);
         upgradeManager = GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>();
+        if (upgradeManager != null)
+        {
+            Debug.Log("UM instance obtained!");
+            if (upgradeManager.UpgradeCollection != null)
+            {
+                Debug.Log("UMC instance obtained!");
+            }
+        }
     }
+
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("clicking upgrade!");
+            if (gameManager.DecreaseScore(100))
+            {
+                OnBuy();
+            }
+        }
+    }   
 
     public void OnBuy()
     {
-        upgradeManager.UpgradeCollection.Add(this);
-        StartCoroutine(Click());
+        Instantiate(_prefab);
+        AutoClickerClickerAction a = new AutoClickerClickerAction();
+        upgradeManager.UpgradeCollection.Add(a);    
     }
     
-    IEnumerator Click()
-    {
-        gameManager.IncreaseScore(Convert.ToInt32((_flatScore + upgradeManager.FlatScoreBonus) * (_scoreMultiplier + upgradeManager.ScoreMultiplierBonus)));
-        yield return new WaitForSeconds(1);
-    }
 }

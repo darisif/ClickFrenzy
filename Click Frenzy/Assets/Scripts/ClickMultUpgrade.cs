@@ -36,21 +36,19 @@ public class ClickMultUpgrade : MonoBehaviour, IUpgrade
 
     private void OnMouseOver()
     {
-        Debug.Log("hovering over upgrade!");
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("clicking upgrade!");
-            if (gameManager.DecreaseScore(10))
+            if (gameManager.DecreaseScore(20))
             {
                 OnBuy();
             }
         }
-    }
+    }   
 
     public void OnBuy()
     {
         Debug.Log("upgrade paid!");
-        _circle.UpgradeCircle(EUpgradeType.ScoreMult, 1.7);
-        gameObject.SetActive(false);
+        _circle.UpgradeCircle(EUpgradeType.ScoreMult, 2.0);
     }
 }

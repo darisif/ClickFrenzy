@@ -10,13 +10,15 @@ public class UpgradeManager : MonoBehaviour
     public int FlatScoreBonus { get; set; } = 1;
     public double ScoreMultiplierBonus { get; set; } = 1.00;
 
-    private void Awake()
+    void Awake()
     {
         //Check if instance already exists
         if (instance == null)
-
+        {
             //if not, set instance to this      
             instance = this;
+            Debug.Log("upgrade manager is on");
+        }
 
         //If instance already exists and it's not this:
         else if (instance != this)

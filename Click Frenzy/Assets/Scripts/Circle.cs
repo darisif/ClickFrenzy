@@ -67,12 +67,12 @@
         /// </summary>
         public void EnableCircleMovement()
         {
-            float var1 = Math.Clamp(Random.Range(0f, 50f), (gameManager.Score / 25 * 0.2f), (gameManager.Score / 10 * 0.2f));
+            float var1 = Math.Clamp(Random.Range(0f, 50f), Convert.ToSingle((gameManager.Score / 25) * 0.2f), Convert.ToSingle(gameManager.Score / 10 * 0.2f));
             if (Random.value > 0.5f)
             {
                 var1 = var1 * -1;
             }
-            float var2 = Math.Clamp(Random.Range(0f, 50f), (gameManager.Score / 25 * 0.2f), (gameManager.Score / 10 * 0.2f));
+            float var2 = Math.Clamp(Random.Range(0f, 50f), Convert.ToSingle(gameManager.Score / 25 * 0.2f), Convert.ToSingle(gameManager.Score / 10 * 0.2f));
             if (Random.value > 0.5f)
             {
                 var2 = var2 * -1;
