@@ -5,12 +5,14 @@ using UnityEngine;
 public class ClickMultUpgrade : MonoBehaviour, IUpgrade
 {
     private Circle _circle;
+    private AudioSource _clickSound = null;
     public static GameObject gameManagerObject = null;
     public static GameManager gameManager = null;
 
     private void Awake()
     {
         gameManagerObject = GameObject.Find("Game Manager");
+        _clickSound = gameObject.GetComponent<AudioSource>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,6 +40,7 @@ public class ClickMultUpgrade : MonoBehaviour, IUpgrade
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _clickSound.Play();
             Debug.Log("clicking upgrade!");
             if (gameManager.DecreaseScore(20))
             {

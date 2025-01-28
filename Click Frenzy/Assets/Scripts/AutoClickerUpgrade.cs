@@ -9,12 +9,14 @@ public class AutoClickerUpgrade : MonoBehaviour, IUpgrade
 {
     public static GameObject gameManagerObject = null;
     public static GameManager gameManager = null;
+    private AudioSource _clickSound = null;
     public UpgradeManager upgradeManager = null;
     [SerializeField] private GameObject _prefab = null;
     
     void Awake()
     {
         gameManagerObject = GameObject.Find("Game Manager");
+        _clickSound = gameObject.GetComponent<AudioSource>();
     }
     
     void Start()
@@ -41,6 +43,7 @@ public class AutoClickerUpgrade : MonoBehaviour, IUpgrade
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _clickSound.Play();
             Debug.Log("clicking upgrade!");
             if (gameManager.DecreaseScore(100))
             {

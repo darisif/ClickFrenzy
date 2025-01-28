@@ -9,6 +9,7 @@
     {
         public static Circle instance { get; set; } = null;
         private Rigidbody2D _circleBody = null;
+        private AudioSource _clickSound = null;
         public static GameObject gameManagerObject = null;
         public static GameManager gameManager = null; 
         private int flatScore = 1;
@@ -28,7 +29,7 @@
                 //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
                 Destroy(gameObject);    
             }
-
+            _clickSound = gameObject.GetComponent<AudioSource>();
             _circleBody = gameObject.GetComponent<Rigidbody2D>();
             _circleBody.gravityScale = 0f;
             gameManagerObject = GameObject.Find("Game Manager");
@@ -56,6 +57,7 @@
             if (Input.GetMouseButtonDown(0))
             //if(Input.GetMouseButton(0))
             {
+                _clickSound.Play();
                 gameObject.transform.localScale -= gameObject.transform.localScale * 0.005f;
                 gameManager.IncreaseScore(Convert.ToInt32(flatScore * scoreMultiplier));
             }
